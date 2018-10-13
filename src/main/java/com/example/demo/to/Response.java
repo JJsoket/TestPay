@@ -1,11 +1,14 @@
 package com.example.demo.to;
 
+import com.example.demo.PayUtil;
+
 public class Response {
     private String id;
     private String dateTime;
     private String state;
 
     public Response() {
+        this(PayUtil.generateId(), PayUtil.getTime(), PayUtil.generateState());
     }
 
     public Response(String id, String dateTime, String state) {
