@@ -10,7 +10,7 @@ public class Amount {
     private String value;
 
     @NotBlank
-    @Pattern(regexp = "USD|RUB|EUR")
+    @Pattern(regexp = "[A-Z]{3}")
     private String currency;
 
     public Amount() {

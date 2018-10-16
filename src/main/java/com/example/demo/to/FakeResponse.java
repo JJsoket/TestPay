@@ -2,16 +2,16 @@ package com.example.demo.to;
 
 import com.example.demo.PayUtil;
 
-public class Response {
+public class FakeResponse {
     private String id;
     private String dateTime;
     private String state;
 
-    public Response() {
+    public FakeResponse() {
         this(PayUtil.generateId(), PayUtil.getTime(), PayUtil.generateState());
     }
 
-    public Response(String id, String dateTime, String state) {
+    public FakeResponse(String id, String dateTime, String state) {
         this.id = id;
         this.dateTime = dateTime;
         this.state = state;
