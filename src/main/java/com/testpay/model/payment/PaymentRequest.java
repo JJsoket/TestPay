@@ -1,5 +1,6 @@
-package com.example.demo.to;
+package com.testpay.model.payment;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.Valid;
@@ -7,25 +8,36 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class Request {
+public class PaymentRequest {
 
     @NotBlank
     @Pattern(regexp = "order")
+    @JsonProperty("intent")
     private String intent;
 
     @URL
     @NotBlank
-    private String notification_url;
+    @JsonProperty("notification_url")
+    private String notificationUrl;
 
     @NotNull
     @Valid
+    @JsonProperty("payer")
     private Payer payer;
 
     @NotNull
     @Valid
+    @JsonProperty("transaction")
     private Transaction transaction;
 
-    public Request() {
+    public PaymentRequest() {
+    }
+
+    public PaymentRequest(String intent, String notificationUrl, Payer payer, Transaction transaction) {
+        this.intent = intent;
+        this.notificationUrl = notificationUrl;
+        this.payer = payer;
+        this.transaction = transaction;
     }
 
     public String getIntent() {
@@ -36,12 +48,12 @@ public class Request {
         this.intent = intent;
     }
 
-    public String getNotification_url() {
-        return notification_url;
+    public String getNotificationUrl() {
+        return notificationUrl;
     }
 
-    public void setNotification_url(String notification_url) {
-        this.notification_url = notification_url;
+    public void setNotificationUrl(String notificationUrl) {
+        this.notificationUrl = notificationUrl;
     }
 
     public Payer getPayer() {

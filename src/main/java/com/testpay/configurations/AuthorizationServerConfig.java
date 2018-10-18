@@ -1,4 +1,4 @@
-package com.example.demo.configurations;
+package com.testpay.configurations;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -18,10 +18,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("id")
+        clients.inMemory().withClient("clientId")
                 .authorizedGrantTypes("client_credentials")
                 .accessTokenValiditySeconds(32398)
-                .scopes("https://api.testpay.com/payments/.*")
+                .scopes("https://api.testpay.com/payments/**")
                 .secret("{noop}secret");
     }
 
