@@ -1,7 +1,6 @@
 package com.testpay.model.payment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.URL;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -15,8 +14,8 @@ public class PaymentRequest {
     @JsonProperty("intent")
     private String intent;
 
-    @URL
     @NotBlank
+    @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]") //URL
     @JsonProperty("notification_url")
     private String notificationUrl;
 

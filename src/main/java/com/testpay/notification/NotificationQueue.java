@@ -43,8 +43,4 @@ public class NotificationQueue {
             }
         }
     }
-
-    public int count() {
-        return internalQueue.size();
-    }
 }

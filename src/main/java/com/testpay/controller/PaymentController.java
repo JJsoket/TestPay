@@ -1,13 +1,9 @@
 package com.testpay.controller;
 
-import com.testpay.model.notification.NotificationMessage;
 import com.testpay.model.payment.PaymentRequest;
 import com.testpay.model.response.ErrorResponse;
-import com.testpay.notification.NotificationEvent;
-import com.testpay.notification.NotificationQueue;
-import com.testpay.notification.signature.INotificationSigner;
-import com.testpay.service.FakeResponseGeneratorService;
-import com.testpay.model.response.PayResponse;
+import com.testpay.model.response.PaymentResponse;
+import com.testpay.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -18,30 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-public class PayController {
+public class PaymentController {
     @Autowired
-    private FakeResponseGeneratorService service;
-    @Autowired
-    private INotificationSigner notificationSigner;
-    @Autowired
-    private NotificationQueue notificationQueue;
+    private PaymentService paymentService;
 
     @PostMapping("/payments/payment")
-    public PayResponse createPayment(@RequestBody @Valid PaymentRequest paymentRequest) {
-        PayResponse fakeResponse = service.generateOne();
-        NotificationMessage notificationMessage = NotificationMessage
-                .fromPaymentRequestAndResponse(paymentRequest, fakeResponse);
-        String notificationSignature = notificationSigner.generateSignature(notificationMessage);
-        notificationMessage.setSha2sig(notificationSignature);
-
-        NotificationEvent event = new NotificationEvent(paymentRequest.getNotificationUrl(),
-                notificationMessage,
-                NotificationEvent.DEFAULT_RETRIES,
-                NotificationEvent.DEFAULT_TIMEOUT_SEC);
-
-        notificationQueue.push(event);
-
-        return fakeResponse;
+    public PaymentResponse createPayment(@RequestBody @Valid PaymentRequest paymentRequest) {
+        PaymentResponse response = paymentService.create(paymentRequest);
+        return response;
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)

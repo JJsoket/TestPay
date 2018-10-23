@@ -4,8 +4,7 @@ import com.testpay.model.notification.NotificationMessage;
 
 import java.time.LocalDateTime;
 
-public class NotificationEvent
-{
+public class NotificationEvent {
     public static int DEFAULT_TIMEOUT_SEC = 10368;
     public static int DEFAULT_RETRIES = 26;
 
@@ -20,8 +19,7 @@ public class NotificationEvent
     public NotificationEvent(String notificationUrl,
                              NotificationMessage message,
                              int retriesCount,
-                             int timeout)
-    {
+                             int timeout) {
         this.notificationUrl = notificationUrl;
         this.message = message;
         this.retriesLeft = retriesCount;
@@ -30,53 +28,43 @@ public class NotificationEvent
         this.nextRunDate = null;
     }
 
-    public int decreaseRetries()
-    {
+    public int decreaseRetries() {
         return --retriesLeft;
     }
 
-    public boolean shouldRetry()
-    {
+    public boolean shouldRetry() {
         return retriesLeft > 0;
     }
 
-    public String getNotificationUrl()
-    {
+    public String getNotificationUrl() {
         return notificationUrl;
     }
 
-    public void setNotificationUrl(String notificationUrl)
-    {
+    public void setNotificationUrl(String notificationUrl) {
         this.notificationUrl = notificationUrl;
     }
 
-    public NotificationMessage getMessage()
-    {
+    public NotificationMessage getMessage() {
         return message;
     }
 
-    public void setMessage(NotificationMessage message)
-    {
+    public void setMessage(NotificationMessage message) {
         this.message = message;
     }
 
-    public int getTimeout()
-    {
+    public int getTimeout() {
         return timeout;
     }
 
-    public void setTimeout(int timeout)
-    {
+    public void setTimeout(int timeout) {
         this.timeout = timeout;
     }
 
-    public LocalDateTime getNextRunDate()
-    {
+    public LocalDateTime getNextRunDate() {
         return nextRunDate;
     }
 
-    public void setNextRunDate(LocalDateTime nextRunDate)
-    {
+    public void setNextRunDate(LocalDateTime nextRunDate) {
         this.nextRunDate = nextRunDate;
     }
 }

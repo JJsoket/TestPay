@@ -2,7 +2,7 @@ package com.testpay.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PayResponse {
+public class PaymentResponse {
     @JsonProperty("id")
     private String id;
 
@@ -12,10 +12,10 @@ public class PayResponse {
     @JsonProperty("state")
     private String state;
 
-    public PayResponse() {
+    public PaymentResponse() {
     }
 
-    public PayResponse(String id, String createTime, String state) {
+    public PaymentResponse(String id, String createTime, String state) {
         this.id = id;
         this.createTime = createTime;
         this.state = state;

@@ -10,19 +10,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 
-class NotificationSubmitter
-{
+class NotificationSubmitter {
     private ObjectMapper mapper;
     private HttpClient httpClient;
 
-    NotificationSubmitter()
-    {
+    NotificationSubmitter() {
         this.mapper = new ObjectMapper();
         this.httpClient = HttpClients.createDefault();
     }
 
-    public boolean submit(NotificationEvent notificationEvent) throws Exception
-    {
+    public boolean submit(NotificationEvent notificationEvent) throws Exception {
         HttpPost httpPost = new HttpPost(notificationEvent.getNotificationUrl());
         String payload = buildPayload(notificationEvent.getMessage());
 
@@ -32,8 +29,7 @@ class NotificationSubmitter
         try {
             HttpResponse response = httpClient.execute(httpPost);
 
-            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
-            {
+            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                 return false;
             }
 
@@ -44,7 +40,7 @@ class NotificationSubmitter
         return true;
     }
 
-    private String buildPayload(NotificationMessage notification) throws JsonProcessingException{
+    private String buildPayload(NotificationMessage notification) throws JsonProcessingException {
         return mapper.writeValueAsString(notification);
     }
 }
