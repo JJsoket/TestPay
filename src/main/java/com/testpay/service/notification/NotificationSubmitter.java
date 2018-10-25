@@ -1,4 +1,4 @@
-package com.testpay.notification;
+package com.testpay.service.notification;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

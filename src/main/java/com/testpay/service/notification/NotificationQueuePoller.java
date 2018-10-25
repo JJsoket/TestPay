@@ -1,4 +1,4 @@
-package com.testpay.notification;
+package com.testpay.service.notification;
 
 class NotificationQueuePoller implements Runnable {
     private NotificationQueue notificationQueue;

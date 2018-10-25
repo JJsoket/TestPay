@@ -1,4 +1,4 @@
-package com.testpay.notification.signature;
+package com.testpay.service.notification.signature;
 
 import com.testpay.model.notification.NotificationMessage;
 import org.apache.commons.codec.digest.DigestUtils;

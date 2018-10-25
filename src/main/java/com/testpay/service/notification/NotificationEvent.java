@@ -1,4 +1,4 @@
-package com.testpay.notification;
+package com.testpay.service.notification;
 
 import com.testpay.model.notification.NotificationMessage;
 

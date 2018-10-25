@@ -1,11 +1,9 @@
-package com.testpay.service;
+package com.testpay.service.payment;
 
 import com.testpay.model.notification.NotificationMessage;
 import com.testpay.model.payment.PaymentRequest;
 import com.testpay.model.response.PaymentResponse;
-import com.testpay.notification.NotificationEvent;
-import com.testpay.notification.NotificationQueue;
-import com.testpay.notification.signature.INotificationSigner;
+import com.testpay.service.notification.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -24,25 +22,14 @@ public class FakePaymentService implements PaymentService {
     private FakeResponseGenerator fakeResponseGenerator;
 
     @Autowired
-    private INotificationSigner notificationSigner;
-
-    @Autowired
-    private NotificationQueue notificationQueue;
+    private NotificationService notificationService;
 
     @Override
     public PaymentResponse create(PaymentRequest paymentRequest) {
         PaymentResponse fakeResponse = fakeResponseGenerator.generate();
         NotificationMessage notificationMessage = NotificationMessage
                 .fromPaymentRequestAndResponse(paymentRequest, fakeResponse);
-        String notificationSignature = notificationSigner.generateSignature(notificationMessage);
-        notificationMessage.setSha2sig(notificationSignature);
-
-        NotificationEvent event = new NotificationEvent(paymentRequest.getNotificationUrl(),
-                notificationMessage,
-                NotificationEvent.DEFAULT_RETRIES,
-                NotificationEvent.DEFAULT_TIMEOUT_SEC);
-
-        notificationQueue.push(event);
+        notificationService.register(notificationMessage, paymentRequest.getNotificationUrl());
         return fakeResponse;
     }
 

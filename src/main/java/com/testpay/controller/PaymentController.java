@@ -3,7 +3,7 @@ package com.testpay.controller;
 import com.testpay.model.payment.PaymentRequest;
 import com.testpay.model.response.ErrorResponse;
 import com.testpay.model.response.PaymentResponse;
-import com.testpay.service.PaymentService;
+import com.testpay.service.payment.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;

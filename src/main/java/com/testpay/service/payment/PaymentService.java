@@ -1,4 +1,4 @@
-package com.testpay.service;
+package com.testpay.service.payment;
 
 import com.testpay.model.payment.PaymentRequest;
 import com.testpay.model.response.PaymentResponse;
